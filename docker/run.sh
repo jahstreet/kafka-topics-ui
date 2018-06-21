@@ -2,12 +2,13 @@
 
 PROXY_SKIP_VERIFY="${PROXY_SKIP_VERIFY:-false}"
 MAX_BYTES="${MAX_BYTES:-50000}"
-RECORD_POLL_TIMEOUT="${RECORD_POLL_TIMEOUT:-2000}"
+RECORD_POLL_TIMEOUT="${RECORD_POLL_TIMEOUT:-5000}"
 DEBUG_LOGS_ENABLED="${DEBUG_LOGS_ENABLED:-true}"
 INSECURE_PROXY=""
 CADDY_OPTIONS="${CADDY_OPTIONS:-}"
 EXPERIMENTAL_PROXY_URL="${EXPERIMENTAL_PROXY_URL:-false}"
 PORT="${PORT:-8000}"
+ANGULAR_BASEPATH=${ANGULAR_BASEPATH}
 
 {
     echo "Landoop Kafka Topics UI ${KAFKA_TOPICS_UI_VERSION}"
@@ -34,7 +35,7 @@ EOF
         if echo "$EXPERIMENTAL_PROXY_URL" | egrep -sq "true|TRUE|y|Y|yes|YES|1"; then
             KAFKA_REST_PROXY_URL=api/kafka-rest-proxy
         else
-            KAFKA_REST_PROXY_URL=/api/kafka-rest-proxy
+            KAFKA_REST_PROXY_URL=$ANGULAR_BASEPATH/api/kafka-rest-proxy
         fi
     fi
 
